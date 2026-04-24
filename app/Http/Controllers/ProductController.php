@@ -5,57 +5,68 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use ProductService;
+use ProductUpdateDto;
+use ProductCreateDto;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(private ProductService $productService) {}
+
     public function index()
     {
-       $product = Product::query()->paginate(10);
-
-        return response()->json($product, 200);
+        return response()->json($this->productService->getList(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(ProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        $productDto = new ProductCreateDto();
+
+        $productDto->name = $request->name;
+
+        $productDto->description = $request->description;
+
+        $productDto->price = $request->price;
+
+        $productDto->category_id = $request->category_id;
+
+        $product = $this->productService->createProduct($productDto);
 
         return response()->json($product, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
+
+    public function show(int $id)
     {
+        return response()->json($this->productService->getProduct($id), 200);
+    }
+
+
+    public function update(ProductRequest $request)
+    {
+        $productDto = new ProductUpdateDto();
+
+        $productDto->id = $request->id;
+
+        $productDto->name = $request->name;
+
+        $productDto->description = $request->description;
+
+        $productDto->price = $request->price;
+
+        $productDto->category_id = $request->category_id;
+
+        $product = $this->productService->updateProduct($productDto);
+
         return response()->json($product, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(ProductRequest $request, Product $product)
+
+    public function destroy(int $id)
     {
 
-       $product->update($request->validated());
-
-        return response()->json($product, 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $product = Product::findOrFail($id);
-
-        $product->delete();
-
-        return response()->json(null, 204);
+        return response()->json($this->productService->deleteProduct($id), 204);
     }
 }
