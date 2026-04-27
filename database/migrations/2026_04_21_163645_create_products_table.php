@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
