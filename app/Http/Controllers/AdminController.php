@@ -76,4 +76,11 @@ class AdminController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Товар обновлён!');
     }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('admin.products.index')->with('success', 'Товар удален!');
+    }
 }

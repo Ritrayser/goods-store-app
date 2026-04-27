@@ -493,6 +493,96 @@ updateForm.put = (args: { product: number | { id: number } } | [product: number 
 
 update.form = updateForm
 
-const AdminController = { dashboard, index, create, store, edit, update }
+/**
+* @see \App\Http\Controllers\AdminController::destroy
+* @see app/Http/Controllers/AdminController.php:80
+* @route '/admin/products/{product}'
+*/
+export const destroy = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(args, options),
+    method: 'delete',
+})
+
+destroy.definition = {
+    methods: ["delete"],
+    url: '/admin/products/{product}',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\AdminController::destroy
+* @see app/Http/Controllers/AdminController.php:80
+* @route '/admin/products/{product}'
+*/
+destroy.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { product: args }
+    }
+
+    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+        args = { product: args.id }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            product: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        product: typeof args.product === 'object'
+        ? args.product.id
+        : args.product,
+    }
+
+    return destroy.definition.url
+            .replace('{product}', parsedArgs.product.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\AdminController::destroy
+* @see app/Http/Controllers/AdminController.php:80
+* @route '/admin/products/{product}'
+*/
+destroy.delete = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(args, options),
+    method: 'delete',
+})
+
+/**
+* @see \App\Http\Controllers\AdminController::destroy
+* @see app/Http/Controllers/AdminController.php:80
+* @route '/admin/products/{product}'
+*/
+const destroyForm = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\AdminController::destroy
+* @see app/Http/Controllers/AdminController.php:80
+* @route '/admin/products/{product}'
+*/
+destroyForm.delete = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: destroy.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'DELETE',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'post',
+})
+
+destroy.form = destroyForm
+
+const AdminController = { dashboard, index, create, store, edit, update, destroy }
 
 export default AdminController
