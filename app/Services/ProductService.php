@@ -1,6 +1,9 @@
 <?php
+namespace App\Services;
 
 use App\Models\Product;
+use App\DTO\ProductCreateDto;
+use App\DTO\ProductUpdateDto;
 
 class ProductService
 {
