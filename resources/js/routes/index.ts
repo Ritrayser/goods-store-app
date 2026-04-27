@@ -1,60 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
-/**
-* @see \App\Http\Controllers\AuthUserController::apiLogin
-* @see app/Http/Controllers/AuthUserController.php:13
-* @route '/api/login'
-*/
-export const apiLogin = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: apiLogin.url(options),
-    method: 'post',
-})
-
-apiLogin.definition = {
-    methods: ["post"],
-    url: '/api/login',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\AuthUserController::apiLogin
-* @see app/Http/Controllers/AuthUserController.php:13
-* @route '/api/login'
-*/
-apiLogin.url = (options?: RouteQueryOptions) => {
-    return apiLogin.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\AuthUserController::apiLogin
-* @see app/Http/Controllers/AuthUserController.php:13
-* @route '/api/login'
-*/
-apiLogin.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: apiLogin.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\AuthUserController::apiLogin
-* @see app/Http/Controllers/AuthUserController.php:13
-* @route '/api/login'
-*/
-const apiLoginForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: apiLogin.url(options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\AuthUserController::apiLogin
-* @see app/Http/Controllers/AuthUserController.php:13
-* @route '/api/login'
-*/
-apiLoginForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: apiLogin.url(options),
-    method: 'post',
-})
-
-apiLogin.form = apiLoginForm
-
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../wayfinder'
 /**
 * @see \App\Http\Controllers\AuthUserController::login
 * @see app/Http/Controllers/AuthUserController.php:28
@@ -191,7 +135,3 @@ postLoginForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> 
 })
 
 postLogin.form = postLoginForm
-
-const AuthUserController = { apiLogin, login, postLogin }
-
-export default AuthUserController

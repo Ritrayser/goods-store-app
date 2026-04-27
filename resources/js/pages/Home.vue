@@ -1,4 +1,3 @@
-<!-- resources/js/Pages/Home.vue -->
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3'
 
@@ -34,7 +33,7 @@ const formatPrice = (price: number | string) => {
     <div class="max-w-7xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-900 mb-2">Каталог товаров</h1>
       <p class="text-gray-500 mb-8">Найдите то, что вам нужно, среди нашего ассортимента</p>
-
+        <div class="mb-4"><a class="text-3x1 font-bold"  href="/admin"> Вход в админку</a></div>
       <div v-if="products.data.length" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <article 
           v-for="product in products.data" 

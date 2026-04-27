@@ -1,4 +1,3 @@
-<!-- resources/js/Pages/admin/Dashboard.vue -->
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3'
 import AdminLayout from '@/layouts/AdminLayout.vue'
@@ -15,7 +14,6 @@ defineProps<{
     <div class="space-y-6">
       <h1 class="text-2xl font-bold text-gray-900">Панель управления</h1>
 
-      <!-- Карточки метрик -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Товары -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200">
@@ -32,7 +30,6 @@ defineProps<{
           </div>
         </div>
 
-        <!-- Категории -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200">
           <div class="flex items-center gap-4">
             <div class="p-3 bg-emerald-50 rounded-lg">
@@ -47,7 +44,6 @@ defineProps<{
           </div>
         </div>
 
-        <!-- Пользователи -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200">
           <div class="flex items-center gap-4">
             <div class="p-3 bg-amber-50 rounded-lg">
@@ -63,7 +59,6 @@ defineProps<{
         </div>
       </div>
 
-      <!-- Блок быстрых действий -->
       <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Быстрые действия</h2>
         <div class="flex flex-wrap gap-3">

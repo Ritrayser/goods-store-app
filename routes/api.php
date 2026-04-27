@@ -18,4 +18,4 @@ Route::apiResource('products', ProductController::class)->only([
     'show',
 ]);
 
-Route::post('login', [AuthUserController::class, 'login']);
+Route::post('login', [AuthUserController::class, 'apiLogin']);

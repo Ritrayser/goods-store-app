@@ -1,16 +1,13 @@
-<!-- resources/js/Pages/admin/Products/Form.vue -->
 <script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 
-// Если передан `product` → это режим редактирования, иначе → создание
 const props = defineProps<{
   product?: any
 }>()
 
 const isEdit = !!props.product
 
-// Инициализируем форму. Данные берутся из product или пустые
 const form = useForm({
   name: props.product?.name || '',
   description: props.product?.description || '',
@@ -49,7 +46,6 @@ const submit = () => {
           <p v-if="form.errors.name" class="text-red-500 text-sm mt-1">{{ form.errors.name }}</p>
         </div>
 
-        <!-- Цена -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Цена (₽)</label>
           <input
@@ -64,7 +60,6 @@ const submit = () => {
           <p v-if="form.errors.price" class="text-red-500 text-sm mt-1">{{ form.errors.price }}</p>
         </div>
 
-        <!-- Описание -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Описание</label>
           <textarea
@@ -77,7 +72,6 @@ const submit = () => {
           <p v-if="form.errors.description" class="text-red-500 text-sm mt-1">{{ form.errors.description }}</p>
         </div>
 
-        <!-- Кнопки действий -->
         <div class="flex gap-3 pt-2">
           <button
             type="submit"
