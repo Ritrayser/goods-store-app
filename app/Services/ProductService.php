@@ -10,7 +10,7 @@ class ProductService
 
     public function getList()
     {
-        return Product::query()->paginate(10);
+        return Product::query()->orderBy('id', 'desc')->paginate(10);
     }
 
     public function createProduct(ProductCreateDto $productCreateDto)

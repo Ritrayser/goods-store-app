@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -12,10 +13,7 @@ use App\Services\ProductService;
 
 class AdminController extends Controller
 {
-    public function __construct(private ProductService $productService)
-    {
-
-    }
+    public function __construct(private ProductService $productService) {}
 
     public function dashboard()
     {
@@ -36,21 +34,16 @@ class AdminController extends Controller
 
         return Inertia::render('admin/products/Index', [
             'products' => $products
-        ]);     
+        ]);
     }
 
     public function create()
     {
-        return Inertia::render('admin/products/Create');     
+        return Inertia::render('admin/products/Create');
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'price'       => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
 
         Product::create($request->all());
 
@@ -61,17 +54,11 @@ class AdminController extends Controller
     {
         return Inertia::render('admin/products/Edit', [
             'product' => $product
-        ]);     
+        ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'price'       => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
-
         $product->update($request->all());
 
         return redirect()->route('admin.products.index')->with('success', 'Товар обновлён!');
